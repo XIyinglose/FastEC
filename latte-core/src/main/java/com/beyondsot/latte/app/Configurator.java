@@ -1,13 +1,19 @@
 package com.beyondsot.latte.app;
 
-import java.util.WeakHashMap;
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 进行一些配置文件的存取跟获取的
  */
 public final class Configurator {
     //配置的文件的存取
-    private static final WeakHashMap<String, Object> LATTE_CONFIGS = new WeakHashMap<>();
+    private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
+    //存储 图标文字的容器
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), false);  // 配置已经开始，但是没有配置完成
@@ -17,8 +23,7 @@ public final class Configurator {
         return Holder.INSTANCE;
     }
 
-    final WeakHashMap<String, Object> getLatteConfigs() {
-
+    final HashMap<String, Object> getLatteConfigs() {
         return LATTE_CONFIGS;
     }
 
@@ -30,6 +35,7 @@ public final class Configurator {
 
     // 是指配置已经完成
     public final void configure() {
+        initIcons();
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
 
     }
@@ -40,13 +46,31 @@ public final class Configurator {
         return this;
     }
 
-    //检查配置有没有检查完成
-    private void  checkConfiguration(){
-        final  boolean isReaby = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY.name());
-        if (!isReaby){
-            throw  new RuntimeException("Configuration is not ready,call configure");
+    //初始化文字图标
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+
         }
     }
+
+    //自定义文字图标
+    public final Configurator WithIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
+        return this;
+    }
+
+    //检查配置有没有检查完成
+    private void checkConfiguration() {
+        final boolean isReaby = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY.name());
+        if (!isReaby) {
+            throw new RuntimeException("Configuration is not ready,call configure");
+        }
+    }
+
     //获取配置
     @SuppressWarnings("unchecked")
     final <T> T getConfiguration(Object key) {
