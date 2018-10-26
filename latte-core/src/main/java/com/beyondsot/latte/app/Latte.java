@@ -15,11 +15,12 @@ public class Latte {
         return Configurator.getInstance();
     }
 
-    private static HashMap<String, Object> getConfigurations() {
+    public static HashMap<String, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
 
-    public  static  Context getApplication(){
+    public static Context getApplication() {
         return (Context) getConfigurations().get(ConfigKeys.APPLICATION_CONTEXT.name());
     }
+
 }

@@ -15,7 +15,6 @@ public abstract class BaseDelegate extends SwipeBackFragment {
 
     //设置布局
     public abstract Object setLayout();
-
     //butterknife
     private Unbinder mUnbinder = null;
     //绑定View
@@ -40,7 +39,7 @@ public abstract class BaseDelegate extends SwipeBackFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mUnbinder!=null){
+        if (mUnbinder != null) {
             mUnbinder.unbind();
         }
     }

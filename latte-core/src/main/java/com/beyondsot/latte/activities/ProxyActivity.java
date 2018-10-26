@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
+
 import com.beyondsot.latte.Delegates.LatteDelegate;
 import com.beyondsot.latte_core.R;
 
@@ -27,7 +28,7 @@ public abstract class ProxyActivity extends SupportActivity {
         container.setId(R.id.delegate_container);
         setContentView(container);
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.delegate_container,setRootDelegate());
+            loadRootFragment(R.id.delegate_container, setRootDelegate());
         }
     }
 

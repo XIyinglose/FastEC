@@ -14,6 +14,7 @@ public class ExampleApp extends Application {
         Latte.init(this)
                 .WithIcon(new FontAwesomeModule()) //添加字体图标
                 .WithIcon(new FontEcModule()) //自定义字体的图标
+                .withApiHost("https://www.baidu.com/")
                 .configure();
     }
 }
