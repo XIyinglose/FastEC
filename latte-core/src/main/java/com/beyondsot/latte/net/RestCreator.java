@@ -18,7 +18,7 @@ public final class RestCreator {
 
     private static final class RetrofitHolder {
         // 請求主路徑
-        private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigKeys.API_HOST.name());
+        private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigKeys.API_HOST);
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(OkHttpHolder.OK_HTTP_CLIENT)

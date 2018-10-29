@@ -1,11 +1,15 @@
 package com.beyondsot.latte.net;
 
 
+import android.content.Context;
+
 import com.beyondsot.latte.net.callback.IError;
 import com.beyondsot.latte.net.callback.IFailure;
 import com.beyondsot.latte.net.callback.IRequest;
 import com.beyondsot.latte.net.callback.ISuccess;
+import com.beyondsot.latte.ui.loader.LoaderStyle;
 
+import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -22,7 +26,9 @@ public class RestClientBuilder {
     private IFailure mIFailure = null;//请求失败
     private IError mIError = null; //请求错误
     private RequestBody mBody = null; //请求体
-
+    private Context mContext = null; //上下文
+    private LoaderStyle mLoaderStyle = null;// 加载框样式
+    private File mFile = null; //文件
     RestClientBuilder() {
 
     }
@@ -67,10 +73,23 @@ public class RestClientBuilder {
         return this;
     }
 
+    //自定义
+    public final RestClientBuilder loader(Context context, LoaderStyle style) {
+        this.mContext = context;
+        this.mLoaderStyle = style;
+        return this;
+    }
+    //默认
+    public final RestClientBuilder loader(Context context) {
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.LineScaleIndicator;
+        return this;
+    }
+
     public final RestClient build() {
 
         return new RestClient(mUrl, PARAMS,
                 mIRequest, mISuccess,
-                mIFailure, mIError, mBody);
+                mIFailure, mIError, mBody,mLoaderStyle,mFile,mContext);
     }
 }

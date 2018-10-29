@@ -1,6 +1,7 @@
 package com.beyondsot.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
 import java.util.WeakHashMap;
@@ -11,16 +12,25 @@ import java.util.WeakHashMap;
 public class Latte {
 
     public static Configurator init(Context context) {
-        getConfigurations().put(ConfigKeys.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+        getConfigurations().put(ConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String, Object> getConfigurations() {
+    public static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
-
-    public static Context getApplication() {
-        return (Context) getConfigurations().get(ConfigKeys.APPLICATION_CONTEXT.name());
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
     }
 
+    public static Context getApplicationContext() {
+        return (Context) getConfigurations().get(ConfigKeys.APPLICATION_CONTEXT);
+    }
+
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
+    }
+    public static Handler getHandler() {
+        return getConfiguration(ConfigKeys.HANDLER);
+    }
 }

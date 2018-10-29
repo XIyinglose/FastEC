@@ -1,12 +1,17 @@
 package com.beyondsot.latte.net;
 
 
+import android.content.Context;
+
 import com.beyondsot.latte.net.callback.IError;
 import com.beyondsot.latte.net.callback.IFailure;
 import com.beyondsot.latte.net.callback.IRequest;
 import com.beyondsot.latte.net.callback.ISuccess;
 import com.beyondsot.latte.net.callback.RequestCallbacks;
+import com.beyondsot.latte.ui.loader.LatteLoader;
+import com.beyondsot.latte.ui.loader.LoaderStyle;
 
+import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.RequestBody;
@@ -24,14 +29,20 @@ public class RestClient {
     private final IFailure FAILURE; //请求失败的回调
     private final IError ERROR; //请求异常的回调
     private final RequestBody BODY; //请求体
-
+    private final LoaderStyle LOADER_STYLE; //加载框的样式
+    private final File FILE; //文件
+    private final Context CONTEXT; //上下文
     public RestClient(String url,
                       WeakHashMap<String, Object> params,
                       IRequest request,
                       ISuccess success,
                       IFailure failure,
                       IError error,
-                      RequestBody body) {
+                      RequestBody body,
+                      LoaderStyle loaderStyle,
+                      File file,
+                      Context context
+                      ) {
         this.URL = url;
         this.PARAMS = params;
         this.REQUEST = request;
@@ -39,6 +50,9 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.LOADER_STYLE =loaderStyle;
+        this.FILE =file;
+        this.CONTEXT =context;
     }
 
     public static RestClientBuilder builder() {
@@ -53,6 +67,11 @@ public class RestClient {
         if (REQUEST != null) {
             REQUEST.onRequestStart();  //请求开始
         }
+        // 显示加载框
+        if (LOADER_STYLE !=null){
+            LatteLoader.showLoading(CONTEXT ,LOADER_STYLE);
+        }
+
         switch (method) {
             case GET:
                 call = restService.get(URL, PARAMS);
@@ -80,7 +99,8 @@ public class RestClient {
                 REQUEST,
                 SUCCESS,
                 FAILURE,
-                ERROR
+                ERROR,
+                LOADER_STYLE
         );
     }
 

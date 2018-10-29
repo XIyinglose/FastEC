@@ -10,4 +10,6 @@ public enum ConfigKeys {
     APPLICATION_CONTEXT, //全局上下文
     CONFIG_READY, //控制配置是否初始化完成
     ICON, //其他的字体配置
+    LOADER_DELAYED, //加载框
+    HANDLER,
 }
