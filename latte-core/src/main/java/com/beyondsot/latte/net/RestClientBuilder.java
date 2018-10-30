@@ -29,6 +29,9 @@ public class RestClientBuilder {
     private Context mContext = null; //上下文
     private LoaderStyle mLoaderStyle = null;// 加载框样式
     private File mFile = null; //文件
+    private String mDownloadDir = null;
+    private String mExtension = null;
+    private String mName = null;
     RestClientBuilder() {
 
     }
@@ -47,6 +50,31 @@ public class RestClientBuilder {
         PARAMS.put(key, value);
         return this;
     }
+
+    public final RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String file) {
+        this.mFile = new File(file);
+        return this;
+    }
+    public final RestClientBuilder name(String name) {
+        this.mName = name;
+        return this;
+    }
+
+    public final RestClientBuilder dir(String dir) {  //存放的目錄
+        this.mDownloadDir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension) { //後綴名稱
+        this.mExtension = extension;
+        return this;
+    }
+
 
     public final RestClientBuilder raw(String raw) {
         this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
@@ -79,6 +107,7 @@ public class RestClientBuilder {
         this.mLoaderStyle = style;
         return this;
     }
+
     //默认
     public final RestClientBuilder loader(Context context) {
         this.mContext = context;
@@ -87,9 +116,11 @@ public class RestClientBuilder {
     }
 
     public final RestClient build() {
-
         return new RestClient(mUrl, PARAMS,
-                mIRequest, mISuccess,
-                mIFailure, mIError, mBody,mLoaderStyle,mFile,mContext);
+                mDownloadDir, mExtension, mName,
+                mIRequest, mISuccess, mIFailure,
+                mIError, mBody, mFile, mContext,
+                mLoaderStyle);
+
     }
 }
