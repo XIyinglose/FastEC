@@ -8,6 +8,8 @@ import com.joanzapata.iconify.Iconify;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import okhttp3.Interceptor;
+
 /**
  * 进行一些配置文件的存取跟获取的
  */
@@ -16,7 +18,10 @@ public final class Configurator {
     private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
     //存储 图标文字的容器
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    //攔截器的容器
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
     private static final Handler HANDLER = new Handler();
+
     private Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);  // 配置已经开始，但是没有配置完成
         LATTE_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
@@ -54,6 +59,17 @@ public final class Configurator {
         return this;
     }
 
+    public final Configurator withInterceptor(Interceptor interceptor) {
+        INTERCEPTORS.add(interceptor);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withInterceptors(ArrayList<Interceptor> interceptors) {
+        INTERCEPTORS.addAll(interceptors);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
 
     //初始化文字图标
     private void initIcons() {

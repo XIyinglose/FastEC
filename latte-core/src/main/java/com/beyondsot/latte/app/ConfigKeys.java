@@ -11,5 +11,11 @@ public enum ConfigKeys {
     CONFIG_READY, //控制配置是否初始化完成
     ICON, //其他的字体配置
     LOADER_DELAYED, //加载框
+    INTERCEPTOR, //攔截器
+    WE_CHAT_APP_ID,
+    WE_CHAT_APP_SECRET,
+    ACTIVITY,
     HANDLER,
+    JAVASCRIPT_INTERFACE,
+    WEB_HOST
 }
