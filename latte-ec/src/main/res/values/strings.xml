@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">latteEC</string>
+    <string name="name">姓名</string>
 </resources>

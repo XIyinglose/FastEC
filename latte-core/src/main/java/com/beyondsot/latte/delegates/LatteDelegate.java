@@ -1,4 +1,4 @@
-package com.beyondsot.latte.Delegates;
+package com.beyondsot.latte.delegates;
 
 
 

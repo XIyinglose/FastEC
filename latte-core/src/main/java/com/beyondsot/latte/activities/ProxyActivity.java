@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
 
-import com.beyondsot.latte.Delegates.LatteDelegate;
+import com.beyondsot.latte.delegates.LatteDelegate;
 import com.beyondsot.latte_core.R;
-
 import me.yokeyword.fragmentation.SupportActivity;
 
 public abstract class ProxyActivity extends SupportActivity {

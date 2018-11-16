@@ -3,8 +3,10 @@ package com.beyondsot.fastec.example;
 import android.app.Application;
 
 import com.beyondsot.latte.app.Latte;
+import com.beyondsot.latte.ec.database.DatabaseManager;
 import com.beyondsot.latte.ec.icon.FontEcModule;
 import com.beyondsot.latte.net.interceptors.DebugInterceptor;
+import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 public class ExampleApp extends Application {
@@ -19,5 +21,18 @@ public class ExampleApp extends Application {
                 .withLoaderDelayed(1000) //加载框的停留时间
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .configure();
+
+        //数据库的初始化
+        DatabaseManager.getInstance().init(this);
+
+        initStetho();
+    }
+    private void  initStetho(){
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                .build()
+        );
     }
 }

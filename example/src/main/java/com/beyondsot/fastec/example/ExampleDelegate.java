@@ -6,14 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.beyondsot.latte.Delegates.LatteDelegate;
+import com.beyondsot.latte.delegates.LatteDelegate;
 import com.beyondsot.latte.net.RestClient;
 import com.beyondsot.latte.net.callback.IError;
 import com.beyondsot.latte.net.callback.IFailure;
 import com.beyondsot.latte.net.callback.ISuccess;
-import com.beyondsot.latte.net.interceptors.DebugInterceptor;
-
-import javax.xml.transform.Result;
 
 public class ExampleDelegate extends LatteDelegate {
     @Override
