@@ -6,10 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.beyondsot.latte.net.RestClient;
 import com.beyondsot.latte.net.callback.ISuccess;
 import com.beyondsot.latte.util.log.LatteLogger;
+import com.beyondsot.latte.wechat.base.LatteWeChat;
+import com.beyondsot.latte.wechat.callbacks.IWeChatSignInCallback;
 import com.beyondsot.latte_ec.R;
 import com.beyondsot.latte.delegates.LatteDelegate;
 
@@ -44,7 +47,14 @@ public class SignInDelegate extends LatteDelegate implements View.OnClickListene
      *  微信登錄
      */
     private void onClickWeChat() {
+        LatteWeChat
+                .getInstance()
+                .onSignSunccess(new IWeChatSignInCallback() {
+                    @Override
+                    public void onSingnInSuccess(String userInfo) {
 
+                    }
+                }).singnIn();
     }
 
     /**

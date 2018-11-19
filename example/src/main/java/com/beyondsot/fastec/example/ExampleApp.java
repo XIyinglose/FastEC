@@ -20,6 +20,8 @@ public class ExampleApp extends Application {
                 .withApiHost("http://192.168.31.80:20002/api/")
                 .withLoaderDelayed(1000) //加载框的停留时间
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
+                .withWeChatAppId("你的微信AppKey")
+                .withWeChatAppSecret("你的微信AppSecret")
                 .configure();
 
         //数据库的初始化

@@ -12,9 +12,9 @@ public enum ConfigKeys {
     ICON, //其他的字体配置
     LOADER_DELAYED, //加载框
     INTERCEPTOR, //攔截器
-    WE_CHAT_APP_ID,
-    WE_CHAT_APP_SECRET,
-    ACTIVITY,
+    WE_CHAT_APP_ID, //微信appID
+    WE_CHAT_APP_SECRET, //微信
+    ACTIVITY,//activity
     HANDLER,
     JAVASCRIPT_INTERFACE,
     WEB_HOST
