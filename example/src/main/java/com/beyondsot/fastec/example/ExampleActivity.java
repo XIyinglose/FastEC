@@ -12,6 +12,7 @@ import com.beyondsot.latte.ec.launcher.LauncherDelegate;
 import com.beyondsot.latte.ec.launcher.LauncherScrollDelegate;
 import com.beyondsot.latte.ec.launcher.OnLauncherFinishTag;
 import com.beyondsot.latte.ec.launcher.TLauncherListener;
+import com.beyondsot.latte.ec.main.EcBottomDelegate;
 import com.beyondsot.latte.ec.sign.ISignListener;
 import com.beyondsot.latte.ec.sign.SignInDelegate;
 
@@ -39,7 +40,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener,TLau
     @Override
     public void onSignInSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
-        startWithPop( new ExampleDelegate());
+        startWithPop( new EcBottomDelegate());
     }
     /**
      * 登錄
@@ -68,7 +69,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener,TLau
         switch (tag){
             case SIGNED: // 登录成功的回调
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                startWithPop( new ExampleDelegate());
+                startWithPop( new EcBottomDelegate());
                 break;
             case NOT_SIGNED: // 没有登录成功的回调
                 Toast.makeText(this, "启动结束，用户没有登录了", Toast.LENGTH_LONG).show();
